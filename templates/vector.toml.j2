@@ -10,7 +10,11 @@ source = '''
 . = parse_syslog!(.message)
 '''
 
-[sinks.print_logs]
-type = "console"
+[sinks.clickhouse]
+type = "clickhouse"
 inputs = ["parse_logs"]
-encoding.codec = "json"
+endpoint = "http://{{ clickhouse_host | default('127.0.0.1') }}:8123"
+database = "logs"
+table = "syslog"
+encoding.timestamp_format = "unix"
+compression = "gzip"
