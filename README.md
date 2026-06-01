@@ -1,38 +1,55 @@
-Role Name
-=========
+# Ansible Role: vector
 
-A brief description of the role goes here.
+Установка и настройка Vector — легковесного агента для сбора и передачи логов в ClickHouse.
 
-Requirements
-------------
+## Requirements
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+- ClickHouse с базой `logs` (создаётся автоматически)
+- ОС: Ubuntu 20.04/22.04 или Debian 11/12
+- Ansible 2.9+
 
-Role Variables
---------------
+## Role Variables
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+| Переменная | Значение по умолчанию | Описание |
+|-----------|----------------------|----------|
+| `vector_version` | `0.55.0` | Версия Vector |
+| `vector_url` | `https://packages.timber.io/vector/{{ vector_version }}/vector-{{ vector_version }}-x86_64-unknown-linux-gnu.tar.gz` | URL для скачивания |
+| `vector_install_dir` | `/opt/vector` | Директория установки |
+| `vector_interval` | `1` | Интервал генерации демо-логов |
+| `clickhouse_host` | `127.0.0.1` | Адрес ClickHouse для отправки логов |
 
-Dependencies
-------------
+## Dependencies
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+Нет.
 
-Example Playbook
-----------------
+## Example Playbook
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+```yaml
+- name: Install Vector
+  hosts: vector
+  vars:
+    clickhouse_host: "192.168.1.20"
+  roles:
+    - vector
+```
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+## Inventory
 
-License
--------
+```yaml
+vector:
+  hosts:
+    vector-01:
+      ansible_connection: local
+```
 
-BSD
+## Tags
 
-Author Information
-------------------
+Теги не заданы.
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+## License
+
+MIT
+
+## Author
+
+@erant-netology-courses
