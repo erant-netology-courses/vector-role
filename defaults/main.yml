@@ -3,4 +3,4 @@
 vector_version: "0.55.0"
 vector_url: "https://packages.timber.io/vector/{{ vector_version }}/vector-{{ vector_version }}-x86_64-unknown-linux-gnu.tar.gz"
 vector_install_dir: "/opt/vector"
-clickhouse_host: "89.169.166.170"
+clickhouse_host: "127.0.0.1"
