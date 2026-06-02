@@ -3,7 +3,7 @@ driver:
   name: docker
 platforms:
   - name: oraclelinux-instance
-    image: oraclelinux:8
+    image: oraclelinux:9
     command: sleep infinity
     privileged: true
 provisioner:
@@ -11,8 +11,6 @@ provisioner:
   config_options:
     defaults:
       remote_tmp: /tmp/.ansible/tmp
-  options:
-    vvv: true
   playbooks:
     prepare: ../resources/prepare.yml
     converge: ../resources/converge.yml
