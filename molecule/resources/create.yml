@@ -3,11 +3,14 @@
   hosts: localhost
   connection: local
   gather_facts: false
+  vars:
+    instance_name: "{{ molecule_yml.platforms[0].name }}"
+    instance_image: "{{ molecule_yml.platforms[0].image }}"
   tasks:
     - name: Create container
       community.docker.docker_container:
-        name: "{{ molecule_instance_name | default('instance') }}"
-        image: "{{ molecule_image | default('ubuntu:22.04') }}"
+        name: "{{ instance_name }}"
+        image: "{{ instance_image }}"
         state: started
         privileged: true
         command: sleep infinity
