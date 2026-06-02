@@ -1,0 +1,12 @@
+---
+- name: Create
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+    - name: Create podman container
+      containers.podman.podman_container:
+        name: podman-instance
+        image: docker.io/ubuntu:22.04
+        state: started
+        command: sleep infinity

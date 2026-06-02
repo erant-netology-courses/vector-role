@@ -1,0 +1,28 @@
+---
+driver:
+  name: podman
+platforms:
+  - name: podman-instance
+    image: docker.io/ubuntu:22.04
+    command: sleep infinity
+    privileged: true
+provisioner:
+  name: ansible
+  config_options:
+    defaults:
+      remote_tmp: /tmp/.ansible/tmp
+  playbooks:
+    prepare: ../resources/prepare.yml
+    converge: converge.yml
+    verify: ../resources/verify.yml
+verifier:
+  name: ansible
+scenario:
+  name: podman
+  test_sequence:
+    - destroy
+    - create
+    - prepare
+    - converge
+    - verify
+    - destroy

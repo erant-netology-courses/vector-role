@@ -1,0 +1,16 @@
+---
+- name: Converge
+  hosts: all
+  gather_facts: true
+  vars:
+    clickhouse_host: "127.0.0.1"
+  pre_tasks:
+    - name: Create temp directory
+      file:
+        path: /tmp/.ansible/tmp
+        state: directory
+        mode: '0777'
+  tasks:
+    - name: Apply vector role
+      ansible.builtin.include_role:
+        name: vector
