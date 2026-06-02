@@ -6,10 +6,11 @@
 Без создания симлинков не получится
 
 ```sh
-mkdir -p molecule/resources/roles molecule/ubuntu/roles molecule/oraclelinux/roles
+mkdir -p molecule/resources/roles molecule/ubuntu/roles molecule/oraclelinux/roles molecule/podman/roles
 ln -s "$(pwd)" molecule/resources/roles/vector
 ln -s "$(pwd)" molecule/ubuntu/roles/vector
 ln -s "$(pwd)" molecule/oraclelinux/roles/vector
+ln -s "$(pwd)" molecule/podman/roles/vector
 ```
 
 ## Запуск
