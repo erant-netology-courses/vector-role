@@ -80,3 +80,5 @@
     method: POST
     body: "CREATE TABLE IF NOT EXISTS logs.syslog (timestamp DateTime, hostname String, message String, app_name String, facility String, severity String, msg_id String, proc_id String, version UInt8) ENGINE = MergeTree() ORDER BY timestamp"
     body_format: raw
+  ignore_errors: true
+  failed_when: false
