@@ -8,6 +8,9 @@ platforms:
     privileged: true
 provisioner:
   name: ansible
+  config_options:
+    defaults:
+      remote_tmp: /tmp/.ansible/tmp
   playbooks:
     prepare: ../resources/prepare.yml
     converge: ../resources/converge.yml
