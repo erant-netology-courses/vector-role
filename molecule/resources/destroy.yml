@@ -1,0 +1,10 @@
+---
+- name: Destroy
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Remove container
+      community.docker.docker_container:
+        name: "{{ molecule_instance_name | default('instance') }}"
+        state: absent
+        force_kill: true

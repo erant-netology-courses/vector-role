@@ -1,0 +1,13 @@
+---
+- name: Create
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+    - name: Create container
+      community.docker.docker_container:
+        name: "{{ molecule_instance_name | default('instance') }}"
+        image: "{{ molecule_image | default('ubuntu:22.04') }}"
+        state: started
+        privileged: true
+        command: sleep infinity
