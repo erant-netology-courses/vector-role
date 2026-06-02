@@ -3,6 +3,11 @@
   hosts: all
   become: true
   tasks:
+    - name: Create ansible tmp directory
+      ansible.builtin.raw: |
+        mkdir -p /tmp/.ansible/tmp && chmod 777 /tmp/.ansible/tmp
+      changed_when: false
+
     - name: Install sudo and Python (Debian)
       ansible.builtin.raw: |
         apt-get update && apt-get install -y sudo python3

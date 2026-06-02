@@ -11,6 +11,8 @@ provisioner:
   config_options:
     defaults:
       remote_tmp: /tmp/.ansible/tmp
+  options:
+    vvv: true
   playbooks:
     prepare: ../resources/prepare.yml
     converge: ../resources/converge.yml
