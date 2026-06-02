@@ -1,0 +1,8 @@
+---
+- name: Prepare
+  hosts: all
+  tasks:
+    - name: Install sudo
+      ansible.builtin.raw: |
+        yum install -y sudo
+      changed_when: false

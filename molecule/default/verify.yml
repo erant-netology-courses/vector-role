@@ -1,0 +1,22 @@
+---
+- name: Verify
+  hosts: all
+  tasks:
+    - name: Find Vector binary
+      ansible.builtin.find:
+        paths: /opt/vector
+        patterns: "vector"
+        recurse: true
+        file_type: file
+      register: vector_binary
+
+    - name: Check Vector binary exists
+      ansible.builtin.assert:
+        that:
+          - vector_binary.matched > 0
+        fail_msg: "Vector binary not found in /opt/vector"
+
+    - name: Check Vector can execute
+      ansible.builtin.command: "{{ vector_binary.files[0].path }} --version"
+      register: vector_version
+      changed_when: false

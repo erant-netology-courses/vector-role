@@ -1,0 +1,14 @@
+---
+- name: Create
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Create container
+      community.docker.docker_container:
+        name: instance
+        image: aragast/netology:latest
+        state: started
+        privileged: true
+        command: sleep infinity
+        volumes:
+          - /sys/fs/cgroup:/sys/fs/cgroup:rw

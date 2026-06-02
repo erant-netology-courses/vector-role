@@ -1,0 +1,27 @@
+---
+driver:
+  name: docker
+platforms:
+  - name: oraclelinux-instance
+    image: oraclelinux:8
+    command: sleep infinity
+    privileged: true
+provisioner:
+  name: ansible
+  playbooks:
+    prepare: ../resources/prepare.yml
+    converge: ../resources/converge.yml
+    verify: ../resources/verify.yml
+    create: ../resources/create.yml
+    destroy: ../resources/destroy.yml
+verifier:
+  name: ansible
+scenario:
+  name: oraclelinux
+  test_sequence:
+    - destroy
+    - create
+    - prepare
+    - converge
+    - verify
+    - destroy
