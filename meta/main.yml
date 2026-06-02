@@ -1,4 +1,6 @@
 galaxy_info:
+  role_name: vector
+  namespace: erant_netology_courses
   author: Anton Netology
   description: Creator
   company: Netology
