@@ -1,22 +1,14 @@
----
 - name: Prepare
   hosts: all
   gather_facts: false
-  become: true
   tasks:
-    - name: Create ansible tmp directory
+    - name: Install sudo and Python
       ansible.builtin.raw: |
-        mkdir -p /tmp/.ansible/tmp && chmod 777 /tmp/.ansible/tmp
-      changed_when: false
-
-    - name: Install sudo and Python (Debian)
-      ansible.builtin.raw: |
-        apt-get update && apt-get install -y sudo python3
-      when: ansible_os_family == "Debian"
-      changed_when: false
-
-    - name: Install sudo and Python (RedHat)
-      ansible.builtin.raw: |
-        dnf install -y sudo python3
-      when: ansible_os_family == "RedHat"
+        if command -v apt-get >/dev/null 2>&1; then
+          apt-get update && apt-get install -y sudo python3
+        elif command -v dnf >/dev/null 2>&1; then
+          dnf install -y sudo python3
+        elif command -v yum >/dev/null 2>&1; then
+          yum install -y sudo python3
+        fi
       changed_when: false
