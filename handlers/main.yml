@@ -1,7 +1,15 @@
 ---
-# handlers file for vector-role
 - name: Restart vector
   become: true
-  ansible.builtin.service:
+  when: systemd_check.stat.exists | default(false)
+  ansible.builtin.systemd:
     name: vector
     state: restarted
+
+- name: Restart vector without systemd
+  become: true
+  when: not (systemd_check.stat.exists | default(false))
+  ansible.builtin.shell: |
+    pkill vector || true
+    sleep 1
+    nohup /opt/vector/bin/vector --config /etc/vector/vector.toml > /var/log/vector.log 2>&1 &
