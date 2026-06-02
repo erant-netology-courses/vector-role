@@ -1,0 +1,17 @@
+---
+- name: Prepare
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Install prerequisites
+      ansible.builtin.raw: |
+        bash -c '
+        if command -v apt-get >/dev/null 2>&1; then
+          apt-get update && apt-get install -y sudo python3 ca-certificates
+        elif command -v dnf >/dev/null 2>&1; then
+          dnf install -y sudo python3 ca-certificates
+        elif command -v yum >/dev/null 2>&1; then
+          yum install -y sudo python3 ca-certificates
+        fi
+        '
+      changed_when: false

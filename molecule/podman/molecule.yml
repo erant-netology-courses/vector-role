@@ -13,9 +13,9 @@ provisioner:
       remote_tmp: /tmp/.ansible/tmp
   playbooks:
     create: create.yml
-    prepare: ../resources/prepare.yml
-    converge: converge.yml
     destroy: destroy.yml
+    prepare: prepare.yml
+    converge: converge.yml
     verify: ../resources/verify.yml
 verifier:
   name: ansible
